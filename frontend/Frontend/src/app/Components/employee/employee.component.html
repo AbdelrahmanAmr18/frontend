@@ -1,0 +1,53 @@
+<!-- <h1 class="btn btn-danger text-center float-right"> Welcome to Employee Page </h1> -->
+
+
+
+<h2 class="py-2">Register</h2>
+<div class="w-75 mx-auto">
+
+    <form (ngSubmit)="SubimtRegisterForm(RegisterForm)" [formGroup]="RegisterForm">
+
+        <label for="Username">Username</label>
+        <input formControlName="Username" class="form-control mb-2">
+        <div *ngIf="RegisterForm.get('Username')?.errors && RegisterForm.get('Username')?.touched">
+            <p *ngIf="RegisterForm.get('Username')?.getError('required')" class="alert py-1 alert-danger">
+                Username is Required
+            </p>
+            <p *ngIf="RegisterForm.get('Username')?.getError('minlength')" class="alert py-1 alert-danger">
+                Username must be more than 3 letters
+            </p>
+            <p *ngIf="RegisterForm.get('Username')?.getError('maxlength')" class="alert py-1 alert-danger">
+                Username must be less than 25 letters
+            </p>
+        </div>
+
+        <label for="Email">Email</label>
+        <input formControlName="Email" class="form-control mb-2">
+        <div *ngIf="RegisterForm.get('Email')?.errors && RegisterForm.get('Email')?.touched">
+            <p *ngIf="RegisterForm.get('Email')?.getError('required')" class="alert py-1 alert-danger">
+                Email is Required
+            </p>
+            <p *ngIf="RegisterForm.get('Email')?.getError('email')" class="alert py-1 alert-danger">
+                Email must be Vaild
+            </p>
+        </div>
+        
+        <label for="Password">Password</label>
+        <input formControlName="Password" class="form-control mb-2">
+        <div *ngIf="RegisterForm.get('Password')?.errors && RegisterForm.get('Password')?.touched">
+            <p *ngIf="RegisterForm.get('Password')?.getError('required')" class="alert py-1 alert-danger">
+                Password is Required
+            </p>
+        </div>
+        
+        <button class="btn btn-primary col-3 mx-auto">
+            <span *ngIf="isLoading"> <i class=" fas fa-spinner fa-spin alert alert-danger"></i> </span>
+            <span *ngIf="!isLoading"> Register </span>
+        </button>
+
+        <button (click)="toRegisterAdmin()" class="btn btn-secondary col-2 mx-auto">
+            <span> Register as Admin </span>
+        </button>
+        
+    </form>
+</div>
